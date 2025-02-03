@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { useParams, Navigate } from 'react-router-dom';
 import { getUserMainData } from '../services/api';
 import DailyActivity from './DailyActivity';
 import MacrosList from './MacrosList';
@@ -6,9 +7,9 @@ import AverageSessions from './AverageSessions';
 import PerformanceRadar from './PerformanceRadar';
 import ScoreChart from './ScoreChart';
 
-const USER_ID = 12; // Centralisation de l'ID utilisateur
-
 export default function ContainerHome() {
+    const { id } = useParams();
+    const userId = parseInt(id);
     const [userData, setUserData] = useState(null);
     const [error, setError] = useState(null);
     const [loading, setLoading] = useState(true);
@@ -16,7 +17,7 @@ export default function ContainerHome() {
     useEffect(() => {
         const fetchUserData = async () => {
             try {
-                const data = await getUserMainData(USER_ID);
+                const data = await getUserMainData(userId);
                 setUserData(data);
             } catch (err) {
                 setError('Erreur lors de la récupération des données');
@@ -27,7 +28,12 @@ export default function ContainerHome() {
         };
 
         fetchUserData();
-    }, []);
+    }, [userId]);
+
+    // Vérification de l'ID valide
+    if (isNaN(userId) || userId < 0) {
+        return <Navigate to="/user/12" />;
+    }
 
     if (loading) return <div>Chargement...</div>;
     if (error) return <div>{error}</div>;
@@ -42,15 +48,15 @@ export default function ContainerHome() {
             
             <div className="container-content">
                 <div className="container-content-left">
-                    <DailyActivity userId={USER_ID} />
+                    <DailyActivity userId={userId} />
                     <div className="charts-row">
-                        <AverageSessions userId={USER_ID} />
-                        <PerformanceRadar userId={USER_ID} />
+                        <AverageSessions userId={userId} />
+                        <PerformanceRadar userId={userId} />
                         <ScoreChart score={userData.todayScore || userData.score} />
                     </div>
                 </div>
                 <div className="container-content-right">
-                    <MacrosList userId={USER_ID} />
+                    <MacrosList userId={userId} />
                 </div>
             </div>
         </>
