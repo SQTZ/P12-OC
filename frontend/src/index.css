@@ -102,4 +102,211 @@ nav a {
   margin-top: auto;
   margin-bottom: 40px;
   font-size: 12px;
+}
+
+/* Styles pour ContainerHome */
+.container-home {
+    padding: 40px 0;
+}
+
+.container-home h1 {
+    font-size: 48px;
+    font-weight: 500;
+    margin-bottom: 20px;
+}
+
+.container-home .name {
+    color: #FF0101;
+}
+
+.container-home p {
+    font-size: 18px;
 } 
+
+.container-content {
+  display: flex;
+  justify-content: space-between;
+  gap: 31px;
+}
+
+/* Styles pour DailyActivity */
+.daily-activity {
+    background: #FBFBFB;
+    padding: 24px;
+    border-radius: 5px;
+    width: 835px;
+    height: 320px;
+    margin: 0;
+}
+
+.daily-activity-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 40px;
+}
+
+.daily-activity h2 {
+    color: #20253A;
+    font-size: 15px;
+    font-weight: 500;
+    margin: 0;
+}
+
+.legend-container {
+    display: flex;
+    gap: 32px;
+}
+
+.legend-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: #74798C;
+    font-size: 14px;
+}
+
+.legend-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+}
+
+.legend-dot.black {
+    background-color: #282D30;
+}
+
+.legend-dot.red {
+    background-color: #E60000;
+}
+
+.recharts-legend-item {
+    margin-left: 30px !important;
+}
+
+.recharts-legend-item-text {
+    color: #74798C !important;
+    margin-left: 10px;
+}
+
+.recharts-tooltip-wrapper {
+    outline: none;
+}
+
+/* Styles pour les macros */
+.macros-list {
+    display: flex;
+    flex-direction: column;
+    gap: 39px;
+}
+
+.macro-card {
+    background: #FBFBFB;
+    padding: 32px;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    width: 258px;
+    height: 124px;
+}
+
+.macro-icon {
+    width: 60px;
+    height: 60px;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.macro-icon img {
+    width: 20px;
+    height: 20px;
+}
+
+.macro-info h3 {
+    color: #282D30;
+    font-size: 20px;
+    font-weight: 700;
+    margin-bottom: 5px;
+}
+
+.macro-info p {
+    color: #74798C;
+    font-size: 14px;
+}
+
+/* Style pour la rangée de graphiques */
+.charts-row {
+    display: flex;
+    gap: 30px;
+}
+
+.chart-card {
+    width: 258px;
+    height: 263px;
+    border-radius: 5px;
+    margin: 0;
+    margin-top: 100px;
+}
+
+/* Styles spécifiques pour chaque type de graphique */
+.average-sessions {
+    background: #FF0000;
+    color: rgba(255, 255, 255, 0.6);
+    position: relative;
+}
+
+.average-sessions h2 {
+    font-size: 15px;
+    font-weight: 500;
+    opacity: 0.5;
+    padding: 30px 20px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    line-height: 24px;
+}
+
+/* Ajout d'un effet de hover sur le graphique */
+.average-sessions:hover {
+    cursor: pointer;
+}
+
+.average-sessions .recharts-responsive-container {
+    position: relative;
+    z-index: 2;
+}
+
+.performance-radar {
+    background: #282D30;
+}
+
+.score-chart {
+    background: #FBFBFB;
+}
+
+/* Styles supplémentaires pour les graphiques */
+.performance-radar {
+    padding: 20px;
+}
+
+.score-chart {
+    position: relative;
+}
+
+.score-chart h2 {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    font-size: 15px;
+    color: #20253A;
+}
+
+/* Ajustement du conteneur principal gauche */
+.container-content-left {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;  /* Espacement vertical entre les graphiques */
+}

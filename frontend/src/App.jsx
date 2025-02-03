@@ -1,5 +1,6 @@
 import Navbar from "./components/Navbar";
 import Sidebar from "./components/Sidebar";
+import ContainerHome from "./components/ContainerHome";
 
 function App() {
   return (
@@ -8,7 +9,7 @@ function App() {
       <div className="main-content">
         <Navbar />
         
-        {/* Le contenu principal ira ici */}
+        <ContainerHome />
       </div>
     </div>
   )
