@@ -18,15 +18,6 @@ const CustomCursor = ({ points }) => {
     );
 };
 
-CustomCursor.propTypes = {
-    points: PropTypes.arrayOf(
-        PropTypes.shape({
-            x: PropTypes.number.isRequired,
-            y: PropTypes.number
-        })
-    ).isRequired
-};
-
 const UserAverageSessions = () => {
     const { id } = useParams();
     const userId = parseInt(id);
@@ -141,6 +132,15 @@ const UserAverageSessions = () => {
             </div>
         </div>
     );
+};
+
+CustomCursor.propTypes = {
+    points: PropTypes.arrayOf(
+        PropTypes.shape({
+            x: PropTypes.number.isRequired,
+            y: PropTypes.number
+        })
+    ).isRequired
 };
 
 export default UserAverageSessions; 

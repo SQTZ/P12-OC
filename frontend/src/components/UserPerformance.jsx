@@ -2,7 +2,6 @@ import { useState, useEffect } from 'react';
 import { useParams, Navigate } from 'react-router-dom';
 import { getUserPerformance } from '../services/api';
 import { Radar, RadarChart, PolarGrid, PolarAngleAxis, ResponsiveContainer } from 'recharts';
-import PropTypes from 'prop-types';
 
 const UserPerformance = () => {
     const { id } = useParams();
@@ -47,7 +46,7 @@ const UserPerformance = () => {
 
     return (
         <div className="performance-page">
-            <h1>Performance par type d'activité</h1>
+            <h1>Performance par type d&apos;activité</h1>
             <div className="performance-stats">
                 <div className="performance-stat">
                     <h3>Performance moyenne</h3>

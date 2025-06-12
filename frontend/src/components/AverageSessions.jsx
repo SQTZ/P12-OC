@@ -17,18 +17,8 @@ const CustomCursor = ({ points }) => {
     );
 };
 
-CustomCursor.propTypes = {
-    points: PropTypes.arrayOf(
-        PropTypes.shape({
-            x: PropTypes.number.isRequired,
-            y: PropTypes.number
-        })
-    ).isRequired
-};
-
 const AverageSessions = ({ userId }) => {
     const [sessionsData, setSessionsData] = useState(null);
-    const days = ['L', 'M', 'M', 'J', 'V', 'S', 'D'];
 
     useEffect(() => {
         const fetchData = async () => {
@@ -132,6 +122,15 @@ const AverageSessions = ({ userId }) => {
 
 AverageSessions.propTypes = {
     userId: PropTypes.number.isRequired
+};
+
+CustomCursor.propTypes = {
+    points: PropTypes.arrayOf(
+        PropTypes.shape({
+            x: PropTypes.number.isRequired,
+            y: PropTypes.number
+        })
+    ).isRequired
 };
 
 export default AverageSessions; 

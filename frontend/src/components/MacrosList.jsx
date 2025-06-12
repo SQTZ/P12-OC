@@ -20,13 +20,6 @@ const MacroCard = ({ icon, value, unit, type, bgColor }) => {
     );
 };
 
-MacroCard.propTypes = {
-    icon: PropTypes.string.isRequired,
-    value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
-    unit: PropTypes.string.isRequired,
-    type: PropTypes.string.isRequired,
-    bgColor: PropTypes.string.isRequired
-};
 
 const MacrosList = ({ userId }) => {
     const [userData, setUserData] = useState(null);
@@ -92,6 +85,14 @@ const MacrosList = ({ userId }) => {
 
 MacrosList.propTypes = {
     userId: PropTypes.number.isRequired
+};
+
+MacroCard.propTypes = {
+    icon: PropTypes.string.isRequired,
+    value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
+    unit: PropTypes.string.isRequired,
+    type: PropTypes.string.isRequired,
+    bgColor: PropTypes.string.isRequired
 };
 
 export default MacrosList; 
