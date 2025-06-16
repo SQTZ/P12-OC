@@ -3,7 +3,13 @@ import { LineChart, Line, XAxis, YAxis, Tooltip, ResponsiveContainer, Rectangle 
 import { getUserAverageSessions } from '../services/api';
 import PropTypes from 'prop-types';
 
+/**
+ * Composant pour créer un curseur personnalisé qui affiche une ombre sur le graphique
+ * lors du survol des données
+ */
 const CustomCursor = ({ points }) => {
+    if (!points || points.length === 0) return null;
+    
     const { x } = points[0];
     return (
         <Rectangle
@@ -17,6 +23,26 @@ const CustomCursor = ({ points }) => {
     );
 };
 
+/**
+ * Mapping des numéros de jours (1-7) vers leurs abréviations en français
+ * 1 = Lundi, 2 = Mardi, etc.
+ * Utilisé pour l'affichage des labels sur l'axe X du graphique
+ */
+const dayMapping = {
+    1: 'L',
+    2: 'M',
+    3: 'M',
+    4: 'J',
+    5: 'V',
+    6: 'S',
+    7: 'D'
+};
+
+/**
+ * Composant AverageSessions qui affiche un graphique linéaire des durées moyennes
+ * des sessions d'entraînement par jour de la semaine
+ * @param {number} userId - L'ID de l'utilisateur dont on veut afficher les données
+ */
 const AverageSessions = ({ userId }) => {
     const [sessionsData, setSessionsData] = useState(null);
 
@@ -24,28 +50,13 @@ const AverageSessions = ({ userId }) => {
         const fetchData = async () => {
             try {
                 const data = await getUserAverageSessions(userId);
-                // Étendre les données sur 10 jours
-                const extendedData = Array(10).fill().map((_, index) => {
-                    if (index < data.sessions.length) {
-                        // Pour les 7 premiers jours, utiliser les vraies données
-                        return {
-                            name: (index + 1).toString(),
-                            value: data.sessions[index].sessionLength
-                        };
-                    } else {
-                        // Pour les 3 derniers jours, utiliser des données simulées
-                        // basées sur la moyenne des sessions existantes
-                        const avgLength = Math.round(
-                            data.sessions.reduce((acc, curr) => acc + curr.sessionLength, 0) / 
-                            data.sessions.length
-                        );
-                        return {
-                            name: (index + 1).toString(),
-                            value: avgLength
-                        };
-                    }
-                });
-                setSessionsData(extendedData);
+                // Transformation des données brutes en format adapté pour le graphique
+                // Conversion des numéros de jours en abréviations (L, M, M, etc.)
+                const formattedData = data.sessions.map(session => ({
+                    name: dayMapping[session.day],
+                    value: session.sessionLength
+                }));
+                setSessionsData(formattedData);
             } catch (error) {
                 console.error('Error fetching sessions data:', error);
             }
@@ -127,10 +138,10 @@ AverageSessions.propTypes = {
 CustomCursor.propTypes = {
     points: PropTypes.arrayOf(
         PropTypes.shape({
-            x: PropTypes.number.isRequired,
+            x: PropTypes.number,
             y: PropTypes.number
         })
-    ).isRequired
+    )
 };
 
 export default AverageSessions; 

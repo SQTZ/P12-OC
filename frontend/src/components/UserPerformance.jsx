@@ -1,8 +1,12 @@
 import { useState, useEffect } from 'react';
 import { useParams, Navigate } from 'react-router-dom';
 import { getUserPerformance } from '../services/api';
-import { Radar, RadarChart, PolarGrid, PolarAngleAxis, ResponsiveContainer } from 'recharts';
+import PerformanceRadar from './PerformanceRadar';
 
+/**
+ * Composant UserPerformance : Page d'affichage des performances
+ * Utilise le composant PerformanceRadar pour le graphique et affiche les statistiques moyennes
+ */
 const UserPerformance = () => {
     const { id } = useParams();
     const userId = parseInt(id);
@@ -30,7 +34,7 @@ const UserPerformance = () => {
         fetchData();
     }, [userId]);
 
-    // Vérification de l'ID valide
+    // Redirection vers un utilisateur par défaut si l'ID n'est pas valide
     if (isNaN(userId) || userId < 0) {
         return <Navigate to="/user/12/performance" />;
     }
@@ -54,28 +58,7 @@ const UserPerformance = () => {
                 </div>
             </div>
             <div className="chart-container">
-                <div className="chart-card performance-radar">
-                    <ResponsiveContainer width="100%" height="100%">
-                        <RadarChart 
-                            cx="50%" 
-                            cy="50%" 
-                            outerRadius="65%" 
-                            data={performanceData}
-                        >
-                            <PolarGrid radialLines={false} />
-                            <PolarAngleAxis 
-                                dataKey="subject" 
-                                tick={{ fill: '#FFFFFF', fontSize: 12 }}
-                            />
-                            <Radar 
-                                name="Performance" 
-                                dataKey="value" 
-                                fill="#FF0101" 
-                                fillOpacity={0.7} 
-                            />
-                        </RadarChart>
-                    </ResponsiveContainer>
-                </div>
+                <PerformanceRadar userId={userId} />
             </div>
         </div>
     );

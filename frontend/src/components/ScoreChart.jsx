@@ -1,8 +1,15 @@
 import { PieChart, Pie, Cell, ResponsiveContainer } from 'recharts';
 import PropTypes from 'prop-types';
 
+/**
+ * Composant qui affiche un graphique circulaire représentant le score de l'utilisateur
+ * @param {number} score - Score entre 0 et 1 représentant la progression de l'utilisateur
+ */
 const ScoreChart = ({ score }) => {
+    // Conversion du score en pourcentage
     const scorePercentage = score * 100;
+    
+    // Données pour le graphique : partie complétée et partie restante
     const data = [
         { name: 'completed', value: scorePercentage },
         { name: 'remaining', value: 100 - scorePercentage }
@@ -13,6 +20,7 @@ const ScoreChart = ({ score }) => {
             <h2>Score</h2>
             <ResponsiveContainer width="100%" height="100%">
                 <PieChart>
+                    {/* Anneau externe représentant la progression */}
                     <Pie
                         data={data}
                         cx="50%"
@@ -25,6 +33,7 @@ const ScoreChart = ({ score }) => {
                         <Cell fill="#FF0000" />
                         <Cell fill="transparent" />
                     </Pie>
+
                     <Pie
                         data={[{ value: 100 }]}
                         cx="50%"
@@ -33,6 +42,7 @@ const ScoreChart = ({ score }) => {
                         outerRadius={70}
                         fill="#FFFFFF"
                     />
+
                     <text
                         x="50%"
                         y="45%"
@@ -42,6 +52,7 @@ const ScoreChart = ({ score }) => {
                     >
                         {scorePercentage}%
                     </text>
+
                     <text
                         x="50%"
                         y="55%"
@@ -57,6 +68,7 @@ const ScoreChart = ({ score }) => {
     );
 };
 
+// Validation des props
 ScoreChart.propTypes = {
     score: PropTypes.number.isRequired
 };

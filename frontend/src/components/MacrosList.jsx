@@ -6,6 +6,15 @@ import fatIcon from '../assets/cheeseburger.svg';
 import { useState, useEffect } from 'react';
 import { getUserMainData } from '../services/api';
 
+/**
+ * Composant MacroCard : Affiche une carte pour un macro-nutriment spécifique
+ * @param {Object} props - Les propriétés du composant
+ * @param {string} props.icon - L'URL de l'icône du macro-nutriment
+ * @param {number|string} props.value - La valeur numérique du macro-nutriment
+ * @param {string} props.unit - L'unité de mesure (g, kCal)
+ * @param {string} props.type - Le type de macro-nutriment (Calories, Protéines, etc.)
+ * @param {string} props.bgColor - La couleur de fond de l'icône
+ */
 const MacroCard = ({ icon, value, unit, type, bgColor }) => {
     return (
         <div className="macro-card">
@@ -20,14 +29,25 @@ const MacroCard = ({ icon, value, unit, type, bgColor }) => {
     );
 };
 
-
+/**
+ * Composant MacrosList : Affiche la liste des macro-nutriments d'un utilisateur
+ * @param {Object} props - Les propriétés du composant
+ * @param {number} props.userId - L'identifiant de l'utilisateur
+ */
 const MacrosList = ({ userId }) => {
+    // État pour stocker les données de l'utilisateur
     const [userData, setUserData] = useState(null);
 
+    /**
+     * Formate un nombre en ajoutant des virgules pour les milliers
+     * @param {number} num - Le nombre à formater
+     * @returns {string} Le nombre formaté
+     */
     const formatNumber = (num) => {
         return num >= 1000 ? num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") : num;
     };
 
+    // useEffect pour récupérer les données de l'utilisateur au chargement
     useEffect(() => {
         const fetchData = async () => {
             try {
@@ -43,6 +63,7 @@ const MacrosList = ({ userId }) => {
 
     if (!userData) return null;
 
+    // Configuration des données pour chaque macro-nutriment
     const macros = [
         {
             icon: caloriesIcon,
@@ -74,6 +95,7 @@ const MacrosList = ({ userId }) => {
         }
     ];
 
+    // Rendu de la liste des macro-nutriments
     return (
         <div className="macros-list">
             {macros.map((macro, index) => (
@@ -83,6 +105,7 @@ const MacrosList = ({ userId }) => {
     );
 };
 
+// Validation des Props
 MacrosList.propTypes = {
     userId: PropTypes.number.isRequired
 };

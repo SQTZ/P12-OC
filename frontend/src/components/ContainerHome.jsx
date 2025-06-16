@@ -43,7 +43,7 @@ export default function ContainerHome() {
         <>
             <div className="container-home">
                 <h1>Bonjour <span className="name">{userData.userInfos.firstName}</span></h1>
-                <p>Félicitation ! Vous avez explosé vos objectifs hier 👏</p>
+                <p>Félicitations ! Vous avez explosé vos objectifs hier 👏</p>
             </div>
             
             <div className="container-content">
